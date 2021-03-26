@@ -7,8 +7,8 @@ for loop in {1..23}; do
 #else
 	#echo "Koleksi_$loop"
 	wget -O Koleksi_$loop -a "Foto.log" https://loremflickr.com/320/240/kitten
-	max=$loop
-	for (( i=1; i<max; i++ )) do
+	max=$((loop-1))
+	for (( i=1; i<=max; i++ )) do
 		if [ -f Koleksi_$i ]; then
 			if cmp Koleksi_$i Koleksi_$loop &> /dev/null; then
 				rm Koleksi_$loop break;
