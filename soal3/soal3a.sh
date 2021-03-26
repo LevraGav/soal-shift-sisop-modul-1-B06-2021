@@ -11,7 +11,8 @@ for loop in {1..23}; do
 	for (( i=1; i<=max; i++ )) do
 		if [ -f Koleksi_$i ]; then
 			if cmp Koleksi_$i Koleksi_$loop &> /dev/null; then
-				rm Koleksi_$loop break;
+				rm Koleksi_$loop
+				break
 			fi
 		fi
 	done
@@ -22,7 +23,8 @@ for loop in {1..23}; do
 	if [ ! -f Koleksi_$loop ]; then
 		for (( i=23; loop<i; i-- )) do
 			if [ -f Koleksi_$i ]; then
-				mv Koleksi_$i Koleksi$loop break
+				mv Koleksi_$i Koleksi$loop
+				break
 			fi
 		done
 	fi
