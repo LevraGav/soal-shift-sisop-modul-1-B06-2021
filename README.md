@@ -288,6 +288,155 @@ else if($8 == "Corporate")
     }
 ```    
 Hal yang sama juga berlaku untuk kemunculan segment Corporate dan Consumer, dimana penambahan kemunculan "Corporate" akan dimasukkan ke dalam variable Corporate begitu juga dengan "Consumer" yang akan dimasukkan ke dalam variable Consumer.
-    
+```bash
+if(Consumer > Corporate)
+    {
+       if(Corporate > HomeOffice)
+       {
+            bidang = "Home Office"
+            transaksi = HomeOffice
+       }
+       else
+       {
+            bidang = "Corporate"
+            transaksi = Corporate
+       }
+    }
+    else if(Consumer < Corporate)
+    {
+        if(Consumer > HomeOffice)
+        {
+            bidang = "Home Office"
+            transaksi = HomeOffice
+        }
+        else
+        {
+            bidang = "Consumer"
+            transaksi = Consumer
+        }
+    }    
+```
+Di bagian ini kami melakukan pembandingan nilai dengan menggunakan percabangan if dan else if untuk mencari segment customer yang memiliki transaksi paling sedikit. Segment yang kami bandingkan pertama kali adalah Corporate dan Consumer, jika nilai kemunculan dari Consumer lebih banyak dari Corporate maka akan masuk ke percabangan selanjutnya.
+```bash
+{
+       if(Corporate > HomeOffice)
+       {
+            bidang = "Home Office"
+            transaksi = HomeOffice
+       }
+       else
+       {
+            bidang = "Corporate"
+            transaksi = Corporate
+       }
+    }
+```
+disini segment yang kami bandingkan adalah Corporate dan Home Office, dari percabangan pertama kita ketahui bahwa kemunculan dari Corporate lebih kecil daripada Consumer. Jika pada percabangan kedua nilai Corporate ternyata lebih besar daripada HomeOffice maka bisa kita simpulkan bahwa nilai kemunculan HomeOffice adalah yang paling kecil dari ketiga segment. Oleh karena itu maka string Home Office nilainya akan dimasukkan ke dalam variable baru bernama Bidang dan jumlah kemunculannya akan dimasukkan ke dalam variable baru bernama transaksi. Aturan yang sama juga berlaku jika yang terjadi adalah sebaliknya.
+```bash
+else if(Consumer < Corporate)
+    {
+        if(Consumer > HomeOffice)
+        {
+            bidang = "Home Office"
+            transaksi = HomeOffice
+        }
+        else
+        {
+            bidang = "Consumer"
+            transaksi = Consumer
+        }
+    }
+```
+Di bagian ini kami kembali melakukan pembandingan nilai dengan menggunakan percabangan if dan else if untuk mencari segment customer yang memiliki transaksi paling sedikit. Segment yang kami bandingkan disini masih sama, yaitu Corporate dan Consumer tetapi disini nilai kemunculan dari Consumer lebih kecil dari Corporate maka akan masuk ke percabangan selanjutnya.
+```bash
+if(Consumer > HomeOffice)
+        {
+            bidang = "Home Office"
+            transaksi = HomeOffice
+        }
+        else
+        {
+            bidang = "Consumer"
+            transaksi = Consumer
+        }
+``` 
+disini segment yang kami bandingkan adalah Corporate dan Home Office, dari percabangan pertama kita ketahui bahwa kemunculan dari Corporate lebih besar daripada Consumer. Jika pada percabangan kedua nilai Consumer ternyata lebih besar daripada HomeOffice maka bisa kita simpulkan bahwa nilai kemunculan HomeOffice adalah yang paling kecil dari ketiga segment. Oleh karena itu maka string Home Office nilainya akan dimasukkan ke dalam variable baru bernama Bidang dan jumlah kemunculannya akan dimasukkan ke dalam variable baru bernama transaksi. Aturan yang sama juga berlaku jika yang terjadi adalah sebaliknya.
+```bash
+END {
+    printf ("\nTipe segmen customer yang penjualannya paling sedikit adalah %s dengan %d transaksi\n", bidang, transaksi)
+}
+' /home/arvel/Documents/Praktikum1/Laporan-TokoShiSop.tsv >> hasil.txt
+```
+Dengan menggunakan percabangan di atas, maka sudah diketahui segment customer apa yang memiliki transaksi dengan jumlah paling sedikit sekaligus berapa transaksi yang terjadi pada segment tersebut. Disini kami hanya melakukan print / cetak dengan memanggil kedua variable baru yaitu bidang dan transaksi.
+
+## 2D.
+TokoShiSop membagi wilayah bagian (region) penjualan menjadi empat bagian, antara lain: Central, East, South, dan West. Manis ingin mencari <b>wilayah bagian (region) yang memiliki total keuntungan (profit) paling sedikit<b> dan <b>total keuntungan wilayah tersebut</b>.
+ 
+ ### Source Code
+ ```bash
+ #NO 2D
+# Mencari daerah yang total keuntungan (profit)-nya paling sedikit dan total keuntungannya
+awk -v ProfitMinimum=99999 '
+BEGIN {FS="\t"} {
+        if(NR!=1)
+        {
+            region[$13]=$21+region[$13]
+        }
+    }
+END{
+    for (daerah in region){
+        if (ProfitMinimum > region[daerah])
+        {
+            ProfitMinimum = region[daerah]
+            DaerahBagian = daerah
+        }
+    }
+    printf ("\nWilayah bagian (region) yang memiliki total keuntungan (profit) yang paling sedikit adalah  %s dengan total %.2f\n", DaerahBagian, ProfitMinimum)
+}' /home/arvel/Documents/Praktikum1/Laporan-TokoShiSop.tsv >> hasil.txt
+```
+### Penjelasan
+Soal 2D meminta kami untuk mencari <b>daerah yang total keuntungan (profit)-nya paling sedikit</b> dan <b>total keuntungannya</b>, dimana jika sudah ditemukan maka yang harus kami cetak di program adalah nama region/daerahnya dan total keuntungan dari region tersebut.
+```bash
+if(NR!=1)
+        {
+            region[$13]=$21+region[$13]
+        }
+```
+NR menandakan Number of Row, disini kami melakukan set bahwa pengecekan data akan dilakukan selama barisnya tidak sama dengan 1. Karena di dalam file tsv baris 1 hanya berisi atribut dan bukan nilai dari data maka tidak perlu dilakukan pengecekan data. Kemudian kami menggunakan ```Associative Array``` dengan region dari $13 (kolom 13 yang berisi region) sebagai index untuk melakukan semacam ```group by``` antara $13 dan $21 (kolom 21 yang berisi profit) sehingga nilai dari profit akan dikelompokkan berdasarkan regionnya. Akumulasi keuntungan dari masing-masing region dengan menggunakan rumus ```region[$13]=$21+region[$13]``` akan disimpan di dalam array ini.
+```bash
+for (daerah in region){
+        if (ProfitMinimum > region[daerah])
+        {
+            ProfitMinimum = region[daerah]
+            DaerahBagian = daerah
+        }
+    }
+```
+Kemudian kami melakukan iterasi untuk setiap total keuntungan dari masing-masing region yang tersimpan  pada array ```region``` untuk mencari region dengan total keuntungan paling sedikit. Jika total keuntungan dari suatu region lebih kecil dari nilai ProfitMinimum yang telah ditetapkan sebelumnya di awal kodingan maka nilai total keuntungan akan disimpan ke dalam variable ```ProfitMinimum``` menggantikan nilai ProfitMinimum yang sudah di set sebelumnya. Sedangkan untuk nama regionnya akan disimpan di dalam variable ```DaerahBagian```.
+```bash
+printf ("\nWilayah bagian (region) yang memiliki total keuntungan (profit) yang paling sedikit adalah  %s dengan total %.2f\n", DaerahBagian, ProfitMinimum)
+}' /home/arvel/Documents/Praktikum1/Laporan-TokoShiSop.tsv >> hasil.txt
+```
+Setelah diketahui nama region yang memiliki total profit paling sedikit sekaligus dengan total profitnya, maka kami melakukan print dengan melakukan pemanggilan variable-variable diatas yaitu DaerahBagian dan ProfitMinimum.
+
+## 2E.
+Membuat script hasil output dari soal 2A, 2B, 2C, dan 2D yang disimpan ke file 'hasil.txt' dengan format:
+```
+Transaksi terakhir dengan profit percentage terbesar yaitu *ID Transaksi* dengan persentase *Profit Percentage*%.
+
+Daftar nama customer di Albuquerque pada tahun 2017 antara lain:
+*Nama Customer1*
+*Nama Customer2* dst
+
+Tipe segmen customer yang penjualannya paling sedikit adalah *Tipe Segment* dengan *Total Transaksi* transaksi.
+
+Wilayah bagian (region) yang memiliki total keuntungan (profit) yang paling sedikit adalah *Nama Region* dengan total keuntungan *Total Keuntungan (Profit)*
+```
+Output dari masing - masing soal 2A, 2B, 2C, dan 2D akan ditampilkan pada file hasil.txt, caranya adalah dengan melakukan redirection untuk mengirim output ke file thasil.txt tersebut. Jika diperhatikan pada source code setiap soal 2A, 2B, 2C, dan 2D kami melakukan redirection hasil output dengan format :
+```
+/home/arvel/Documents/Praktikum1/Laporan-TokoShiSop.tsv >> hasil.txt
+```
+lambang ```<<``` menandakan bahwa hasil output dimana datanya bersumber dari Laporan-TokoShiSop.tsv akan dimasukkan ke dalam hasil.txt.
+
 
 
