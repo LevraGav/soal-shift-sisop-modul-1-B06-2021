@@ -1,5 +1,10 @@
 # soal-shift-sisop-modul-1-B06-2021
-Penyelesaian Pengerjaan Soal Praktikum SISOP Modul 1 - Kelompok B06
+Laporan Penyelesaian Pengerjaan Soal Praktikum SISOP Modul 1 - Kelompok B06
+
+## File .sh
+- [Soal 1](https://github.com/LevraGav/soal-shift-sisop-modul-1-B06-2021/tree/main/soal1)
+- [Soal 2](https://github.com/LevraGav/soal-shift-sisop-modul-1-B06-2021/tree/main/soal2)
+- [Soal 3](https://github.com/LevraGav/soal-shift-sisop-modul-1-B06-2021/tree/main/soal3)
 
 # --- No 1 ---
 ## Pengerjaan
