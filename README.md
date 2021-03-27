@@ -454,6 +454,7 @@ loop standar
 
 -a adalah parameter untuk meng-append log ke file log yang sudah ada atau membuatnya jika belum ada
 
+```bash
     max=$((loop-1))
     for (( i=1; i<=max; i++ )) do
         if [ -f Koleksi_$i ]; then
@@ -463,6 +464,7 @@ loop standar
             fi
         fi
     done
+```
 
 Nested if untuk mengecek gambar yang sama: max menandai jumlah file maksimal yang harus di-cek, -f mengecek apakah file itu ada, lalu digunakanlah command cmp untuk mengecek perbedaan antara dua gambar, jika gambar berbeda, maka akan ada output bita mana yang berbeda.
 
@@ -470,6 +472,7 @@ Output tersebut akan dilempar ke /dev/null menggunakan redirector '&>' (redirect
 
 Jika ada output, maka if akan dianggap true dan file tersebut di-remove, dan terjadi break di loop itu agar pengecekan tidak dilanjutkan.
 
+```bash
     for loop in {1..23}; do
         if [ ! -f Koleksi_$loop ]; then
             for (( i=23; loop<i; i-- )) do
@@ -480,19 +483,23 @@ Jika ada output, maka if akan dianggap true dan file tersebut di-remove, dan ter
             done
         fi
     done
+```
 
 Loop selanjutnya digunakan untuk mengisi lubang yang kosong setelah mungkina ada file yang di-remove. if pertama mengecek apakah file untuk nomor tertentu tidak ada, menggunakan operator negasi (!) dan parameter -f, jika nomor tersebut terbukti tidak memiliki file, pencarian akan dilanjutkan.
 
 For yang ada dalamnya akan mencari dari belakang untuk file terbaru, lalu setelah menemukan adanya file dengan -f, file tersebut akan dipindahkan ke tempat nomor yang kosong tadi.
 
+```bash
     for loop in {1..9}; do
         mv Koleksi_$loop Koleksi_0$loop
     done
+```
 
 Loop terakhir digunakan untuk menambahkan 0 ke nama file satu digit, karena jika tidak, file dua digit misal Koleksi_11 akan diletakkan sebelum angka satu digit misal Koleksi_9, dan itu tidak rapi.
 
 ## 3b. Penjelasan
 
+```bash
     #!/bin/bash
 
     folder="$(date '+%d-%m-%Y')"
@@ -500,6 +507,7 @@ Loop terakhir digunakan untuk menambahkan 0 ke nama file satu digit, karena jika
     bash /home/nor/sisop/s1/soal3a.sh
     mv Koleksi* $folder
     mv Foto.log $folder
+```
 
 Shebang (#!) di awal digunakan untuk menspesifikkan command yang digunakan untuk menjalankan suatu skrip, dalam kasus ini, bash.
 
@@ -510,8 +518,10 @@ Soal 3a dijalankan.
 
 File-file yang sudah terunduh beserta file log-nya dipindahkan ke folder tersebut.
 
+```bash
     0 20 1-31/7 * * /bin/bash /home/nor/sisop/s1/soal3b.sh
     0 20 2-31/4 * * /bin/bash /home/nor/sisop/s1/soal3b.sh
+```
 
 0 20 artinya cron dijalankan tiap menit 0 jam 20 atau jam 20.00.
 
@@ -524,13 +534,16 @@ Bintang kiri artinya cron dijalankan tiap bulan, sedangkan, bintang yang kanan a
 
 ## 3c. Penjelasan
 
+```bash
     kucing=$(find Kucing* 2> /dev/null | wc -l)
     kelinci=$(find Kelinci* 2> /dev/null | wc -l)
+```
 
 Command find digunakan untuk me-list jumlah folder yang ada, lalu digunakan redirector '2>' untuk membuang error (stderr) yang ada ke /dev/null, agar tidak mengganggu pipeline.
 
 Output tersebut di pipeline ke wc dengan parameter -l untuk menghitung jumlah baris/ line, lalu output tersebut dimasukkan ke masing-masing variabel kucing dan kelinci.
 
+```bash
     if (( kucing == kelinci )); then
     folder="Kucing_$(date '+%d-%m-%Y')"
     mkdir $folder
@@ -594,6 +607,7 @@ elif (( kucing > kelinci )); then
         mv Koleksi_$loop Koleksi_0$loop
     done
 fi
+```
 
 Kode-kode di atas terlihat kompleks, namun sebenarnya itu hanyalah soal 3a dan soal 3a yang disalin dan kucing-nya diganti kelinci, jika jumlah folder kucing dan kelinci sama, maka gambar-gambar kucing akan diunduh untuk hari itu, namun, jika ada lebih banyak folder kucing, yang diunduh adalah gambar kelinci.
 
@@ -601,12 +615,14 @@ Beberapa tambahan yaitu variabel folder dideklarasikan terlebih dahulu untuk fol
 
 ## 3d. Penjelasan
 
+```bash
     #!/bin/bash
 
     pwd="$(date '+%m%d%Y')"
     zip -P $pwd -r Koleksi K*
     rm -r Kucing*
     rm -r Kelinci*
+```
 
 Variabel pwd dideklerasikan dengan cara yang sama dengan deklarasi nama folder tadi.
 
@@ -616,9 +632,11 @@ Command rm dijalankan untuk me-remove semua folder kucing dan kelinci secara rek
 
 ## 3e. Penjelasan
 
+```bash
     0 1 * * * /bin/bash/ /home/nor/sisop/s1/soal3c.sh
     0 7 * * 1-5 /bin/bash /home/nor/sisop/s1/soal3d.sh
     0 18 * * 1-5 cd /home/nor/sisop/s1 && unzip -P $(date +"%m%d%Y") Koleksi.zip
+```
 
 Untuk baris pertama cron, tidak dituliskan secara eksplisit siapa yang disuruh mengunduh gambar anak kucing dan kelinci secara bergantian tiap hari atau menggunakan apa pada soal 3c. Namun, karena ada cron, sekalian saja kami gunakan itu.
 0 1 * * * artinya soal3c.sh dijalankan tiap hari jam 01.00.
