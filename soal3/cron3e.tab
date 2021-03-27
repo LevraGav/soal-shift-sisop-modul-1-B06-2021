@@ -1,2 +1,3 @@
+0 1 * * * /bin/bash/ /home/nor/sisop/s1/soal3c.sh
 0 7 * * 1-5 /bin/bash /home/nor/sisop/s1/soal3d.sh
 0 18 * * 1-5 cd /home/nor/sisop/s1 && unzip -P $(date +"%m%d%Y") Koleksi.zip
