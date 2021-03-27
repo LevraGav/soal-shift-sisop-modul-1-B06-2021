@@ -87,7 +87,7 @@ END {
 ' /home/arvel/Documents/Praktikum1/Laporan-TokoShiSop.tsv >> hasil.txt
 
 #NO 2D
-# 
+# Mencari region/daerah dengan total keuntungan (profit) yang paling sedikit
 awk -v ProfitMinimum=99999 '
 BEGIN {FS="\t"} {
         if(NR!=1)
