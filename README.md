@@ -444,11 +444,15 @@ Kuuhaku adalah orang yang sangat suka mengoleksi foto-foto digital, namun Kuuhak
 
 ## 3a. Penjelasan
 
+```bash
     for loop in {1..23}; do
+```
 
 loop standar
 
+```bash
     wget -O Koleksi_$loop -a "Foto.log" https://loremflickr.com/320/240/kitten
+```
 
 -O adalah parameter untuk memberikan nama custom ke file output
 
