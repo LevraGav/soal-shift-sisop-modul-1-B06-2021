@@ -159,7 +159,7 @@ Dengan menggunakan rumus profit percentage yang sudah disediakan soal, maka kami
 END{
     printf("Transaksi terakhir dengan profit percentage terbesar yaitu %d dengan persentase %d%%. \n", MAXRowID, ProfitMax)}' /home/arvel/Documents/Praktikum1/Laporan-TokoShiSop.tsv >> hasil.txt
 ```    
-Di bagian END tinggal melakukan printf untuk mencetak hasi program, yaitu dengan melakukan pemanggilan dari masing-masing variable MAXRowID dan ProfitMax. Selain itu juga dilakukan penghubungan direktori file tsv agar memasukkan output program ke dalam sebuah file bernama hasil.txt.
+Di bagian END tinggal melakukan printf untuk mencetak hasil program, yaitu dengan melakukan pemanggilan dari masing-masing variable MAXRowID dan ProfitMax. Selain itu juga dilakukan penghubungan direktori file tsv agar memasukkan output program ke dalam sebuah file bernama hasil.txt.
 
 ## 2B.
 Clemong memiliki rencana promosi di Albuquerque menggunakan metode MLM. Oleh karena itu, Clemong membutuhkan daftar <b>nama customer pada transaksi tahun 2017 di Albuquerque</b>.
@@ -440,6 +440,10 @@ Output dari masing - masing soal 2A, 2B, 2C, dan 2D akan ditampilkan pada file h
 lambang ```<<``` menandakan bahwa hasil output dimana datanya bersumber dari Laporan-TokoShiSop.tsv akan dimasukkan ke dalam hasil.txt.
 
 ## Output
+![Output Soal no 2](https://user-images.githubusercontent.com/72689610/113423498-c6b73500-93f8-11eb-8eb9-c188187bc93a.jpg)
+
+## Kendala
+Tidak ada kendala dalam pengerjaan soal nomor 2.
 
 # --- No 3 ---
 Kuuhaku adalah orang yang sangat suka mengoleksi foto-foto digital, namun Kuuhaku juga merupakan seorang yang pemalas sehingga ia tidak ingin repot-repot mencari foto, selain itu ia juga seorang pemalu, sehingga ia tidak ingin ada orang yang melihat koleksinya tersebut, sayangnya ia memiliki teman bernama Steven yang memiliki rasa kepo yang luar biasa. Kuuhaku pun memiliki ide agar Steven tidak bisa melihat koleksinya, serta untuk mempermudah hidupnya, yaitu dengan meminta bantuan kalian.
