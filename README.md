@@ -439,6 +439,8 @@ Output dari masing - masing soal 2A, 2B, 2C, dan 2D akan ditampilkan pada file h
 ```
 lambang ```<<``` menandakan bahwa hasil output dimana datanya bersumber dari Laporan-TokoShiSop.tsv akan dimasukkan ke dalam hasil.txt.
 
+## Output
+
 # --- No 3 ---
 Kuuhaku adalah orang yang sangat suka mengoleksi foto-foto digital, namun Kuuhaku juga merupakan seorang yang pemalas sehingga ia tidak ingin repot-repot mencari foto, selain itu ia juga seorang pemalu, sehingga ia tidak ingin ada orang yang melihat koleksinya tersebut, sayangnya ia memiliki teman bernama Steven yang memiliki rasa kepo yang luar biasa. Kuuhaku pun memiliki ide agar Steven tidak bisa melihat koleksinya, serta untuk mempermudah hidupnya, yaitu dengan meminta bantuan kalian.
 
