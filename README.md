@@ -532,7 +532,7 @@ Soal 3a dijalankan.
 File-file yang sudah terunduh beserta file log-nya dipindahkan ke folder tersebut.
 
 ```bash
-    PATH=/opt/someApp/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
     0 20 1-31/7 * * /bin/bash /home/nor/sisop/s1/soal3b.sh
     0 20 2-31/4 * * /bin/bash /home/nor/sisop/s1/soal3b.sh
     
