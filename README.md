@@ -673,7 +673,7 @@ Untuk baris pertama cron, tidak dituliskan secara eksplisit siapa yang disuruh m
 
 0 18 * * 1-5 artinya tiap Senin-Jumat, jam 18.00, akan dijalankan 2 buat command yaitu crontab akan cd ke folder tempat koleksi berada, lalu command unzip akan dijalankan dengan parameter -P dengan password yang sama yaitu tanggal dari hari itu.
 
-Revisi: Ditambahkan command cd agar file terdownload di folder s1
+Revisi: Ditambahkan command cd agar agar script soal3c dan soal3c dijalankan di folder s1
 
 Revisi: Di command terakhir, ditambahkan command rm untuk menghapus zip Koleksi
 
