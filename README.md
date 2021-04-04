@@ -12,6 +12,8 @@ Ryujin baru saja diterima sebagai IT support di perusahaan Bukapedia. Dia diberi
 ## Pengerjaan
 ```bash
 #!bin/bash
+ #1a                                                                                                                                                                                               
+ grep -oP "(?<=: )(.*)" syslog.log 
  
  #1b
  grep -oP "(?<=ERROR )(.*)(?= [(])" syslog.log | sort | uniq -c | sort -nr | 
@@ -51,7 +53,17 @@ Ryujin baru saja diterima sebagai IT support di perusahaan Bukapedia. Dia diberi
 ```
 ## Penjelasan
 
-1A B D
+1A
+Regex untuk mencari semua Error dan info yang ada
+```bash
+grep -oP "(?<=: )(.*)" syslog.log 
+```
+Regex ini mencari kata kata yang diawali dengan ": " lalu akan mengouputkan itu ke console.
+###Output Soal 1A
+![Output Soal no 1A](https://i.ibb.co/h8FXs0P/Screenshot-from-2021-04-04-12-31-24.png)
+![Output Soal no 1A2](https://i.ibb.co/cXSytYN/Screenshot-from-2021-04-04-12-31-43.png)
+
+1B D
 Regex 
 ```bash
 grep -oP "(?<=ERROR )(.*)(?= [(])" syslog.log | sort | uniq -c | sort -nr | 
@@ -68,6 +80,8 @@ karena format terbalik, setiap line diputar dengan snipper kode
       echo $b,$a
  done
 ```
+![Output Soal no 1B](https://i.ibb.co/Y08VRpv/Screenshot-from-2021-04-04-12-32-07.png)
+
 Untuk 1d sendiri hanya menambahkan Error,Count dan menaruh ke file csv
 ```bash
  grep -oP "(?<=ERROR )(.*)(?= [(])" syslog.log | sort | uniq -c | sort -nr | 
@@ -78,7 +92,7 @@ Untuk 1d sendiri hanya menambahkan Error,Count dan menaruh ke file csv
 ```
 sed sendiri digunakan hanya untuk menyelipkan "Error,Count" di line pertama dan di export ke error_message.csv
 
-1A C E
+1C E
 Untuk mendapatkan semua nama username dapat dilihat dengan snippet code dibawah
 ```bash
 cut -d"(" -f2 < syslog.log | cut -d")" -f1
@@ -97,9 +111,20 @@ while read -r line
            printf "%s,%d,%d\n" $line $b $a
         done
 ```
+![Output Soal no 1C](https://i.ibb.co/M5J7WhS/Screenshot-from-2021-04-04-12-32-25.png)
+
 Sebenarnya -E dan -o tidak perlu digunakan tapi sudah di push jadi yasudahlah
 kode diatas mengiterasi dari line 1 nama - nama dari output pipeline dan menghitung okurensi nama tersebut keluar diantara Error dan Info lalu menprint tersebut ke file
 karena diawal file ingin ada kata kata "Username,Info,Error" dapat dilakukan sed agar awal file terdapat line tersebut.
+```bash
+while read -r line
+        do
+           a=$(grep -E -o "ERROR.*($line))" syslog.log | wc -l)
+           b=$(grep -E -o "INFO.*($line))" syslog.log | wc -l)
+           printf "%s,%d,%d\n" $line $b $a
+        done | sed '1 i\Error,Count' > error_message.csv
+```
+
 
 ## Permasalahan
 - Belum terbiasa dengan syntax
