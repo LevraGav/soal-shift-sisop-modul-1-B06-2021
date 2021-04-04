@@ -92,6 +92,8 @@ Untuk 1d sendiri hanya menambahkan Error,Count dan menaruh ke file csv
 ```
 sed sendiri digunakan hanya untuk menyelipkan "Error,Count" di line pertama dan di export ke error_message.csv
 
+![Output Soal no 1D](https://i.ibb.co/mSqFkPY/user.png)
+
 1C E
 Untuk mendapatkan semua nama username dapat dilihat dengan snippet code dibawah
 ```bash
@@ -124,6 +126,7 @@ while read -r line
            printf "%s,%d,%d\n" $line $b $a
         done | sed '1 i\Error,Count' > error_message.csv
 ```
+![Output Soal no 1E](https://i.ibb.co/rM6Rh53/error.png)
 
 
 ## Permasalahan
